@@ -7,6 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Auth yglee
+ * 2020.09.07 작성
+ *
+ */
 
 @Getter
 @Entity
@@ -17,7 +26,7 @@ public class Member {
 
     @Id
     @GeneratedValue
-    @Column(name="uid")
+    @Column(name="member_id")
     private Long id;
 
     @Column
@@ -28,6 +37,9 @@ public class Member {
 
     @Column
     private String username;  //사용자 이름
+
+    @OneToMany(mappedBy = "member")
+    private List<Schedule> schedules = new ArrayList<>();
 
     @Builder
     public Member(String userId, String password, String username) {
