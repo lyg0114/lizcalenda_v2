@@ -1,5 +1,6 @@
 package liz.kyle.calendal.domain;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
@@ -42,8 +43,13 @@ public class Schedule {
     @JoinColumn(name="member_id")
     private Member member;
 
-
-
-
-
+    @Builder
+    public Schedule(String userid, String regdate, String reskind, LocalDateTime addtime, boolean isDelete, Member member) {
+        this.userid = userid;
+        this.regdate = regdate;
+        this.reskind = reskind;
+        this.addtime = addtime;
+        this.isDelete = isDelete;
+        this.member = member;
+    }
 }
