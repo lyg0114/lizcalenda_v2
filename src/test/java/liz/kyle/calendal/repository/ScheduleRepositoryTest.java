@@ -23,7 +23,7 @@ class ScheduleRepositoryTest {
     ScheduleRepository scheduleRepository;
 
     @Autowired
-    ScheduleRepository memberRepository;
+    MemberRepository memberRepository;
 
 
     @PersistenceContext
@@ -41,13 +41,13 @@ class ScheduleRepositoryTest {
                 .build();
 
 
-
         Schedule sche1 = Schedule.builder()
                 .userid(member1.getUserId())
                 .regdate("201910.01.19")
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
                 .isDelete(false)
+                .member(member1)
                 .build();
 
         Schedule sche2 = Schedule.builder()
@@ -55,6 +55,7 @@ class ScheduleRepositoryTest {
                 .regdate("201910.01.19")
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
+                .member(member1)
                 .isDelete(false)
                 .build();
 
@@ -63,6 +64,7 @@ class ScheduleRepositoryTest {
                 .regdate("201910.01.19")
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
+                .member(member1)
                 .isDelete(false)
                 .build();
 
@@ -73,11 +75,7 @@ class ScheduleRepositoryTest {
 
         member1.reserveTime(schedules);
 
-
-        em.persist(member1);
-
-
-        //Member savedMember = memberRepository.save(member1);
+        Member member = memberRepository.save(member1);
 
 
     }

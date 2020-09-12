@@ -38,7 +38,7 @@ public class Member {
     @Column
     private String username;  //사용자 이름
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Schedule> schedules = new ArrayList<>();
 
     @Builder
