@@ -43,7 +43,7 @@ class ScheduleRepositoryTest {
                 .password("testpassword")
                 .username("이영교")
                 .build();
-        Member findMember = memberRepository.save(member1);
+
 
         Schedule sche1 = Schedule.builder()
                 .userid(member1.getUserId())
@@ -51,7 +51,7 @@ class ScheduleRepositoryTest {
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
                 .isDelete(false)
-                .member(findMember)
+                .member(member1)
                 .build();
 
 
@@ -60,7 +60,7 @@ class ScheduleRepositoryTest {
                 .regdate("2019.10.01.19")
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
-                .member(findMember)
+                .member(member1)
                 .isDelete(false)
                 .build();
 
@@ -69,7 +69,7 @@ class ScheduleRepositoryTest {
                 .regdate("2019.10.01.19")
                 .reskind("lesson")
                 .addtime(LocalDateTime.now())
-                .member(findMember)
+                .member(member1)
                 .isDelete(false)
                 .build();
 

@@ -43,7 +43,6 @@ public class Member {
 
     @Builder
     public Member(String userId, String password, String username){
-
         this.userId = userId;
         this.password = password;
         this.username = username;
@@ -56,10 +55,7 @@ public class Member {
     }
 
     public void addSchedule(Schedule sche){
-        System.out.println("sche = " + sche);
-        System.out.println("###################");
         this.schedules.add(sche);
-        sche.setMember(this);
     }
 
 
