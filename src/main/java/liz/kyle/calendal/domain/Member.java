@@ -38,16 +38,16 @@ public class Member {
     @Column
     private String username;  //사용자 이름
 
-    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
-    private List<Schedule> schedules = new ArrayList<Schedule>();
+    @OneToMany(mappedBy = "member")
+    private List<Schedule> schedules = new ArrayList<>();
 
     @Builder
-    public Member(long id, String userId, String password, String username, List<Schedule> schedules){
-        this.id = id;
+    public Member(String userId, String password, String username){
+
         this.userId = userId;
         this.password = password;
         this.username = username;
-        this.schedules = schedules;
+
     }
 
 
