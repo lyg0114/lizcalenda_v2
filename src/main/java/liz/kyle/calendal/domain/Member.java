@@ -39,10 +39,11 @@ public class Member {
     private String username;  //사용자 이름
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
-    private List<Schedule> schedules = new ArrayList<>();
+    private List<Schedule> schedules = new ArrayList<Schedule>();
 
     @Builder
-    public Member(String userId, String password, String username, List<Schedule> schedules){
+    public Member(long id, String userId, String password, String username, List<Schedule> schedules){
+        this.id = id;
         this.userId = userId;
         this.password = password;
         this.username = username;
@@ -52,6 +53,13 @@ public class Member {
 
     public void reserveTime(List<Schedule> schedules){
         this.schedules = schedules;
+    }
+
+    public void addSchedule(Schedule sche){
+        System.out.println("sche = " + sche);
+        System.out.println("###################");
+        this.schedules.add(sche);
+        sche.setMember(this);
     }
 
 

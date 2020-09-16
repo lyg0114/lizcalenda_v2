@@ -56,6 +56,6 @@ public class Schedule {
     //연관관계 메서드
     public void setMember(Member member){
         this.member = member;
-        member.getSchedules().add(this);
     }
+
 }
