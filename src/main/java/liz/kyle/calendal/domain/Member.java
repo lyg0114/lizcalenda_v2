@@ -38,20 +38,28 @@ public class Member {
     @Column
     private String username;  //사용자 이름
 
-    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member")
     private List<Schedule> schedules = new ArrayList<>();
 
     @Builder
-    public Member(String userId, String password, String username, List<Schedule> schedules){
+    public Member(String userId, String password, String username){
+
         this.userId = userId;
         this.password = password;
         this.username = username;
-        this.schedules = schedules;
+
     }
 
 
     public void reserveTime(List<Schedule> schedules){
         this.schedules = schedules;
+    }
+
+    public void addSchedule(Schedule sche){
+        System.out.println("sche = " + sche);
+        System.out.println("###################");
+        this.schedules.add(sche);
+        sche.setMember(this);
     }
 
 
