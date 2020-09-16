@@ -2,6 +2,7 @@ package liz.kyle.calendal.repository;
 
 import liz.kyle.calendal.domain.Member;
 import liz.kyle.calendal.domain.Schedule;
+import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +37,14 @@ class ScheduleRepositoryTest {
     EntityManager em;
 
     @Test
-    public void AddSchedule(){
+    public void 시간등록(){
 
+        //given
         Member member1 = Member.builder()
                 .userId("yglee")
                 .password("testpassword")
                 .username("이영교")
                 .build();
-
 
         Schedule sche1 = Schedule.builder()
                 .userid(member1.getUserId())
@@ -53,7 +54,6 @@ class ScheduleRepositoryTest {
                 .isDelete(false)
                 .member(member1)
                 .build();
-
 
         Schedule sche2 = Schedule.builder()
                 .userid(member1.getUserId())
@@ -73,6 +73,7 @@ class ScheduleRepositoryTest {
                 .isDelete(false)
                 .build();
 
+        //when
         member1.addSchedule(sche1);
         member1.addSchedule(sche2);
         member1.addSchedule(sche3);
@@ -93,6 +94,7 @@ class ScheduleRepositoryTest {
         memberRepository.save(member1);
         Member findMember = memberRepository.findById(member1.getId()).get();
 
+        //Then
         assertThat(findMember).isEqualTo(member1);
 
 
@@ -100,14 +102,43 @@ class ScheduleRepositoryTest {
 
 
     @Test
-    public void ModifySchedule(){
-        Member member1 = Member.builder().userId("yglee").password("testpassword").username("이영교")
-                                .build();
+    public void 스케쥴변경(){
+        //GINVE ##########################################################
 
-        Schedule sche1 = Schedule.builder()
-                .userid(member1.getUserId()).regdate("201910.01.19")
-                .reskind("lesson").addtime(LocalDateTime.now()).isDelete(false).member(member1).build();
+        //기존시간
+        String oriRegdate = "2019.10.01.19";
 
+        //변경할 시간
+        String changeRegdate = "2020.11.11.11";
+
+        //수강생
+        Member member1 = Member.builder().userId("yglee").password("testpassword").username("이영교").build();
+
+        //예약시간
+        Schedule sche1 = Schedule.builder().userid(member1.getUserId()).regdate(oriRegdate).reskind("lesson")
+                                            .addtime(LocalDateTime.now()).isDelete(false).member(member1).build();
+
+
+        //WHEN ##########################################################
+
+        memberRepository.save(member1);
+        scheduleRepository.save(sche1);
+
+        Member findMember1 = memberRepository.findById(member1.getId()).get();
+        Schedule findSchedule = scheduleRepository.findById(sche1.getId()).get();
+        findMember1.addSchedule(findSchedule);
+
+        //THEN ###########################################################
+
+        assertThat(findMember1.getId()).isEqualTo(member1.getId());
+
+        findMember1.getSchedules().stream()
+                .filter(x -> oriRegdate.equals(x.getRegdate())).findAny().orElse(null)
+                .changeRegDate(changeRegdate);
+
+
+        Member findMember2 = memberRepository.findById(findMember1.getId()).get();
+        assertThat(findMember1.getSchedules().get(0).getRegdate()).isEqualTo(changeRegdate);
 
     }
 

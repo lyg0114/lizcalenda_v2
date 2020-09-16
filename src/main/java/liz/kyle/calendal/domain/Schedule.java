@@ -53,5 +53,13 @@ public class Schedule {
         this.member = member;
     }
 
+    public void allocMember(Member member){
+        this.member = member;
+    }
+
+    public void changeRegDate(String newRegDage){
+        this.regdate = newRegDage;
+    }
+
 
 }
