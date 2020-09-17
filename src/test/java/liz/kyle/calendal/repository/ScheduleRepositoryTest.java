@@ -143,8 +143,43 @@ class ScheduleRepositoryTest {
     }
 
     @Test
-    public void DeleteSchedule(){
+    public void 스케쥴삭제(){
+        //GINVE ##########################################################
+        String delRegdate = "2019.10.01.19";
 
+        //수강생
+        Member member = Member.builder().userId("yglee").password("testpassword").username("이영교").build();
+
+        //예약시간1
+        Schedule sche1 = Schedule.builder().userid(member.getUserId()).regdate("2019.10.01.19").reskind("lesson")
+                .addtime(LocalDateTime.now()).isDelete(false).member(member).build();
+        //예약시간2
+        Schedule sche2 = Schedule.builder().userid(member.getUserId()).regdate("2019.10.01.20").reskind("lesson")
+                .addtime(LocalDateTime.now()).isDelete(false).member(member).build();
+        //예약시간3
+        Schedule sche3 = Schedule.builder().userid(member.getUserId()).regdate("2019.10.01.21").reskind("lesson")
+                .addtime(LocalDateTime.now()).isDelete(false).member(member).build();
+
+        memberRepository.save(member);
+        scheduleRepository.save(sche1);
+        scheduleRepository.save(sche2);
+        scheduleRepository.save(sche3);
+
+        member.addSchedule(sche1);
+        member.addSchedule(sche2);
+        member.addSchedule(sche3);
+
+        //WHEN ##########################################################
+        Member findMember = memberRepository.findById(member.getId()).get();
+
+
+        assertThat(scheduleRepository.count()).isEqualTo(3);
+        scheduleRepository.delete(findMember.getSchedules().stream().filter(x -> delRegdate.equals(x.getRegdate())).findAny().get());
+        assertThat(scheduleRepository.count()).isEqualTo(2);
+
+
+        //THEN ##########################################################
     }
+
 
 }

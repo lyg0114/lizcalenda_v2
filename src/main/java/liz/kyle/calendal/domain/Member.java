@@ -53,7 +53,7 @@ public class Member {
         this.schedules = schedules;
     }
 
-    //연관관계 메소드SELECT * FROM TBL_STD_SCHEDULE
+    //연관관계 메소드
     public void addSchedule(Schedule sche){
         this.schedules.add(sche);
         sche.allocMember(this);
