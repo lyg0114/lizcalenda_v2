@@ -38,8 +38,7 @@ class ScheduleRepositoryTest {
 
     @Test
     public void 스케쥴_등록(){
-
-        //given
+        //GIVEN ##########################################################
         Member member1 = Member.builder()
                 .userId("yglee")
                 .password("testpassword")
@@ -73,7 +72,7 @@ class ScheduleRepositoryTest {
                 .isDelete(false)
                 .build();
 
-        //when
+        //WHEN ##########################################################
         member1.addSchedule(sche1);
         member1.addSchedule(sche2);
         member1.addSchedule(sche3);
@@ -94,7 +93,7 @@ class ScheduleRepositoryTest {
         memberRepository.save(member1);
         Member findMember = memberRepository.findById(member1.getId()).get();
 
-        //Then
+        //THEN ##########################################################
         assertThat(findMember).isEqualTo(member1);
 
 
