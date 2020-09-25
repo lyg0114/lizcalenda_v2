@@ -1,10 +1,8 @@
 package liz.kyle.calendal.domain;
 
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import liz.kyle.calendal.domain.bbs.Posts;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,9 +16,10 @@ import java.util.List;
  */
 
 @Getter
-@Entity
-@Table(name="TBL_MEMBER")
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name="TBL_MEMBER")
+@Entity
 public class Member {
 
 
@@ -40,6 +39,10 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Schedule> schedules = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Posts> posts = new ArrayList<>();
+
 
     @Builder
     public Member(String userId, String password, String username){

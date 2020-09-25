@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
  *
  */
 
-@Entity
+
 @Getter
-@Table(name="TBL_STD_SCHEDULE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name="TBL_STD_SCHEDULE")
+@Entity
 public class Schedule {
 
     @Id

@@ -37,7 +37,7 @@ class ScheduleRepositoryTest {
     EntityManager em;
 
     @Test
-    public void 시간등록(){
+    public void 스케쥴_등록(){
 
         //given
         Member member1 = Member.builder()
@@ -102,7 +102,7 @@ class ScheduleRepositoryTest {
 
 
     @Test
-    public void 스케쥴변경(){
+    public void 스케쥴_변경(){
         //GINVE ##########################################################
 
         //기존시간
@@ -143,7 +143,7 @@ class ScheduleRepositoryTest {
     }
 
     @Test
-    public void 스케쥴삭제(){
+    public void 스케쥴_삭제(){
         //GINVE ##########################################################
         String delRegdate = "2019.10.01.19";
 
