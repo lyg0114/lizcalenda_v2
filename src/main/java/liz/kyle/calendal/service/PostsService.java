@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -29,14 +30,9 @@ public class PostsService {
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
+        Member member = memberRepository.
+                findByUserId(requestDto.getUserId()).orElseThrow(() -> new IllegalArgumentException("해당 userid 가 없습니다."));
 
-        //Member를 조회만 했는데 insert까지 발생!!!! 왜그러지???!!!
-        Member member = memberRepository.findByUserId(requestDto.getUserId())
-                                        .orElseThrow(() -> new IllegalArgumentException("해당 id의 사용자가 존재하지 않습니다."));
-
-        System.out.println("member = " + member);
-        System.out.println("member.getUserId() = " + member.getUserId());
-        System.out.println("###########################");
         return postsRepository.save(requestDto.toEntity(member)).getId();
     }
 

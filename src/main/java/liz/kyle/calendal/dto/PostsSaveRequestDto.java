@@ -21,7 +21,6 @@ public class PostsSaveRequestDto {
 
     public Posts toEntity(Member member) {
 
-
         return Posts.builder()
                 .title(title)
                 .content(content)

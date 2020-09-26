@@ -25,7 +25,7 @@ public class Posts extends BaseTimeEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id")
+    @JoinColumn(name="userId")
     private Member member;
 
     @Builder
