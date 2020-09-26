@@ -1,6 +1,6 @@
 package liz.kyle.calendal.dto;
 
-import liz.kyle.calendal.domain.Member;
+import liz.kyle.calendal.domain.member.Member;
 import liz.kyle.calendal.domain.bbs.Posts;
 
 import java.time.LocalDateTime;

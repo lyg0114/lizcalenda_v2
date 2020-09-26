@@ -1,6 +1,6 @@
 package liz.kyle.calendal.repository;
 
-import liz.kyle.calendal.domain.Member;
+import liz.kyle.calendal.domain.member.Member;
 import liz.kyle.calendal.domain.bbs.Posts;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional

@@ -1,7 +1,7 @@
 package liz.kyle.calendal.domain.bbs;
 
 import liz.kyle.calendal.domain.BaseTimeEntity;
-import liz.kyle.calendal.domain.Member;
+import liz.kyle.calendal.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

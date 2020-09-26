@@ -1,4 +1,5 @@
 package liz.kyle.calendal.domain;
+import liz.kyle.calendal.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

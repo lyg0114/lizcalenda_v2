@@ -1,9 +1,7 @@
 package liz.kyle.calendal.repository;
 
-import liz.kyle.calendal.domain.Member;
+import liz.kyle.calendal.domain.member.Member;
 import liz.kyle.calendal.domain.Schedule;
-import org.hibernate.metamodel.model.domain.internal.MapMember;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

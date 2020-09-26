@@ -1,6 +1,6 @@
 package liz.kyle.calendal.service;
 
-import liz.kyle.calendal.domain.Member;
+import liz.kyle.calendal.domain.member.Member;
 import liz.kyle.calendal.domain.bbs.Posts;
 import liz.kyle.calendal.dto.PostsListResponseDto;
 import liz.kyle.calendal.dto.PostsResponseDto;
@@ -9,12 +9,10 @@ import liz.kyle.calendal.dto.PostsUpdateRequestDto;
 import liz.kyle.calendal.repository.MemberRepository;
 import liz.kyle.calendal.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -39,7 +37,7 @@ public class PostsService {
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
-                            .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+                            .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다. id=" + id));
 
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
