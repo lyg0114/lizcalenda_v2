@@ -1,10 +1,12 @@
 package liz.kyle.calendal.service;
 
+import liz.kyle.calendal.domain.Member;
 import liz.kyle.calendal.domain.bbs.Posts;
 import liz.kyle.calendal.dto.PostsListResponseDto;
 import liz.kyle.calendal.dto.PostsResponseDto;
 import liz.kyle.calendal.dto.PostsSaveRequestDto;
 import liz.kyle.calendal.dto.PostsUpdateRequestDto;
+import liz.kyle.calendal.repository.MemberRepository;
 import liz.kyle.calendal.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -21,18 +23,26 @@ public class PostsService {
 
 
     private final PostsRepository postsRepository;
+    private final MemberRepository memberRepository;
+
 
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
 
-        return postsRepository.save(requestDto.toEntity()).getId();
+        Member member = memberRepository.findByUserId(requestDto.getUserId())
+                                        .orElseThrow(() -> new IllegalArgumentException("해당 id의 사용자가 존재하지 않습니다."));
+
+        System.out.println("member = " + member);
+        System.out.println("member.getUserId() = " + member.getUserId());
+        System.out.println("###########################");
+        return postsRepository.save(requestDto.toEntity(member)).getId();
     }
 
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+                            .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
