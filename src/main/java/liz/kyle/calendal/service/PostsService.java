@@ -30,6 +30,7 @@ public class PostsService {
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
 
+        //Member를 조회만 했는데 insert까지 발생!!!! 왜그러지???!!!
         Member member = memberRepository.findByUserId(requestDto.getUserId())
                                         .orElseThrow(() -> new IllegalArgumentException("해당 id의 사용자가 존재하지 않습니다."));
 
