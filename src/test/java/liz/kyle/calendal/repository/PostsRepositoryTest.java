@@ -36,6 +36,7 @@ class PostsRepositoryTest {
                 .password("testpassword")
                 .username("이영교")
                 .build();
+        memberRepository.save(member);
 
         postsRepository.save(Posts.builder()
                 .title(title)

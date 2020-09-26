@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="TBL_STD_SCHEDULE")
 @Entity
-public class Schedule {
+public class Schedule extends BaseTimeEntity{
 
     @Id
     @GeneratedValue
@@ -35,9 +35,6 @@ public class Schedule {
     private String reskind;  //예약종류
 
     @Column
-    private LocalDateTime addtime; //데이터 입력 시간
-
-    @Column
     private boolean isDelete; //삭제여부
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -49,7 +46,6 @@ public class Schedule {
         this.userid = userid;
         this.regdate = regdate;
         this.reskind = reskind;
-        this.addtime = addtime;
         this.isDelete = isDelete;
         this.member = member;
     }
